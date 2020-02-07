@@ -17,6 +17,9 @@ def main():
     # Define the size/resolution of our window
     res_x = 640
     res_y = 480
+    """movimento = pygame.mouse.get_rel()"""
+    pygame.mouse.set_visible(False)
+    pygame.event.set_grab(True)
 
     # Create a window and a display surface
     screen = pygame.display.set_mode((res_x, res_y))
@@ -32,18 +35,40 @@ def main():
     # This cube has 1 unit of side, and is red
     obj1 = Object3d("TestObject")
     obj1.scale = vector3(1, 1, 1)
-    obj1.mesh = Mesh.create_piramide((1, 1, 1))
+    obj1.mesh = Mesh.create_cube((1, 1, 1))
     obj1.material = Material(color(1,0,0,1), "TestMaterial1")
     scene.add_object(obj1)
-    
 
     # Create a second object, and add it as a child of the first object
     # When the first object rotates, this one will also mimic the transform
     obj2 = Object3d("ChildObject")
-    obj2.position += vector3(0.75, 0.75, 0.75)
-    obj2.mesh = Mesh.create_piramide((0.5, 0.5, 0.5))
+    obj2.position += vector3(0, 0.75, 0)
+    obj2.mesh = Mesh.create_cube((0.5, 0.5, 0.5))
     obj2.material = Material(color(0,1,0,1), "TestMaterial2")
     obj1.add_child(obj2)
+
+    obj3 = Object3d("TestObject")
+    obj3.scale = vector3(2, 2, 2)
+    obj3.position = vector3(1, 1, 2)
+    obj3.mesh = Mesh.create_cube((1, 1, 1))
+    obj3.material = Material(color(1,0,1,1), "TestMaterial3")
+    scene.add_object(obj3)
+
+    obj5 = Object3d("TestObject")
+    obj5.scale = vector3(2, 2, 2)
+    obj5.position = vector3(-2, 0, 4)
+    obj5.mesh = Mesh.create_cube((1, 1, 1))
+    obj5.material = Material(color(0.5,1,0.5,1), "TestMaterial5")
+
+    scene.add_object(obj5)
+
+    obj6 = Object3d("TestObject")
+    obj6.scale = vector3(2, 2, 2)
+    obj6.position = vector3(-2, 0, 0)
+    obj6.mesh = Mesh.create_cube((1, 1, 1))
+    obj6.material = Material(color(1,0.5,0.5,1), "TestMaterial6")
+
+    scene.add_object(obj6)
 
     # Specify the rotation of the object. It will rotate 15 degrees around the axis given, 
     # every second
@@ -54,10 +79,6 @@ def main():
     # Timer
     delta_time = 0
     prev_time = time.time()
-
-    rotx = vector3(1, 0, 0)
-    roty = vector3(0, 1, 0)
-    rotz = vector3(0, 0, 1)
 
     # Game loop, runs forever
     while (True):
@@ -70,36 +91,19 @@ def main():
             elif (event.type == pygame.KEYDOWN):
                 if (event.key == pygame.K_ESCAPE):
                     return
-
+        #move player
         key = pygame.key.get_pressed()
-        #Mover
-        if(key[pygame.K_w]):
-            obj1.position = (roty*(-0.001))+obj1.position
         if(key[pygame.K_s]):
-            obj1.position = (roty*(0.001))+obj1.position
+            scene.camera.position -= vector3(0,0,0.005)
+        if(key[pygame.K_w]):
+            scene.camera.position += vector3(0,0,0.005)
         if(key[pygame.K_a]):
-            obj1.position = (rotx*(-0.001))+obj1.position
+            scene.camera.position -= vector3(0.005,0,0)
         if(key[pygame.K_d]):
-            obj1.position = (rotx*(0.001))+obj1.position
-        #Rodar
-        if (key[pygame.K_LEFT]):
-            q = from_rotation_vector((roty * -0.001).to_np3())
-            obj1.rotation = q * obj1.rotation
-        if (key[pygame.K_RIGHT]):
-            q = from_rotation_vector((roty * 0.001).to_np3())
-            obj1.rotation = q * obj1.rotation
-        if (key[pygame.K_UP]):
-            q = from_rotation_vector((rotx * 0.001).to_np3())
-            obj1.rotation = q * obj1.rotation
-        if (key[pygame.K_DOWN]):
-            q = from_rotation_vector((rotx * -0.001).to_np3())
-            obj1.rotation = q * obj1.rotation
-        if (key[pygame.K_PAGEUP]):
-            q = from_rotation_vector((rotz * 0.001).to_np3())
-            obj1.rotation = q * obj1.rotation
-        if (key[pygame.K_PAGEDOWN]):
-            q = from_rotation_vector((rotz * -0.001).to_np3())
-            obj1.rotation = q * obj1.rotation
+            scene.camera.position += vector3(0.005,0,0)
+
+        
+
         # Clears the screen with a very dark blue (0, 0, 20)
         screen.fill((0,0,0))
 

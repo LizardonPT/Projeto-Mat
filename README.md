@@ -5,3 +5,9 @@
 - O passo seguinte foi introduzir os controlos para o movimento no ficheiro mysample.py que replicamos do sample.py para evitar perder a base do códige caso algo inesperado acontecesse.
 - Para dar a ilusão de que a camera se mexe de acordo com os controlos w, a, s, d, intoduzimos condições "if" que movem as pirâmides no sentido oposto da tecla pressionada pelo usuário.
 - Para as rotações em torno dos eixos x, y e z, criamos 3 variáveis com valores de vetores unitários ((1,0,0), (0,1,0), (0,0,1)) para introduzir no codigo que faz os calculos para a rotação em função do vetor itroduzido. Juntado esta parte de código com as condições "if" ficou definido as teclas pedidas para a rotação dos objetos.
+
+# 2º Commit:
+- Adicionamos um ficheiro chamado FPV.py para fazer o programa estilo "FPS"
+- Usamos novamente o codigo já feito no mesh.py para adicionarmos mais uns cubos ao cenário.
+- Já se consegue mover a camera pelo cenário através de condições "if" que verificam se as teclas são pressionadas.
+- Falta adicionar o movimento da visão da camera que será controlado pelo motion do rato e falta também fazer com que o programa não renderize nada para trás da visão do usuário, pois caso aconteça o programa crasha.

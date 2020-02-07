@@ -36,13 +36,13 @@ class Mesh:
             mesh = Mesh("UnknownCube")
 
         Mesh.create_quad(vector3( size[0] * 0.5, 0, 0), vector3(0, size[1] * 0.5, 0), vector3(0, 0, size[2] * 0.5), mesh)
-        #Mesh.create_quad(vector3(-size[0] * 0.5, 0, 0), vector3(0, size[1] * 0.5, 0), vector3(0, 0, size[2] * 0.5), mesh)
+        Mesh.create_quad(vector3(-size[0] * 0.5, 0, 0), vector3(0, size[1] * 0.5, 0), vector3(0, 0, size[2] * 0.5), mesh)
 
         Mesh.create_quad(vector3(0,  size[1] * 0.5, 0), vector3(size[0] * 0.5, 0), vector3(0, 0, size[2] * 0.5), mesh)
-        #Mesh.create_quad(vector3(0, -size[1] * 0.5, 0), vector3(size[0] * 0.5, 0), vector3(0, 0, size[2] * 0.5), mesh)
+        Mesh.create_quad(vector3(0, -size[1] * 0.5, 0), vector3(size[0] * 0.5, 0), vector3(0, 0, size[2] * 0.5), mesh)
 
         Mesh.create_quad(vector3(0, 0,  size[2] * 0.5), vector3(size[0] * 0.5, 0), vector3(0, size[1] * 0.5, 0), mesh)
-        #Mesh.create_quad(vector3(0, 0, -size[2] * 0.5), vector3(size[0] * 0.5, 0), vector3(0, size[1] * 0.5, 0), mesh)
+        Mesh.create_quad(vector3(0, 0, -size[2] * 0.5), vector3(size[0] * 0.5, 0), vector3(0, size[1] * 0.5, 0), mesh)
 
         return mesh
 
@@ -54,12 +54,34 @@ class Mesh:
         poly = []
         poly.append(origin + axis0 + axis1)
         poly.append(origin + axis0 - axis1)
-        #poly.append(origin - axis0 - axis1)
+        poly.append(origin - axis0 - axis1)
         poly.append(origin - axis0 + axis1)
 
         mesh.polygons.append(poly)
 
         return mesh
 
+    @staticmethod
+    def create_piramide(size, mesh = None):
+        if (mesh == None):
+            mesh = Mesh("UnknownCube")
     
+        Mesh.create_triangulo(vector3( size[0] * 0.5, 0, 0), vector3(0, size[1] * 0.5, 0), vector3(0, 0, size[2] * 0.5), mesh)
+        Mesh.create_triangulo(vector3(0,  size[1] * 0.5, 0), vector3(size[0] * 0.5, 0), vector3(0, 0, size[2] * 0.5), mesh)
+        Mesh.create_triangulo(vector3(0, 0,  size[2] * 0.5), vector3(size[0] * 0.5, 0), vector3(0, size[1] * 0.5, 0), mesh)
 
+        return mesh
+
+    @staticmethod
+    def create_triangulo(origin, axis0, axis1, mesh):
+        if (mesh == None):
+            mesh = Mesh("UnknownQuad")
+
+        poly = []
+        poly.append(origin + axis0 + axis1)
+        poly.append(origin + axis0 - axis1)
+        poly.append(origin - axis0 + axis1)
+
+        mesh.polygons.append(poly)
+
+        return mesh
