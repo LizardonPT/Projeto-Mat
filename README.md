@@ -1,3 +1,7 @@
+# Trabalho realixado por:
+- João Gonçalves a21901696
+- João Fonseca a21905441
+- Francisco Salgado a21902823
 # 1º Commit:
 - Após dedicar algum tempo a ler o código e a percebe-lo, apercebemo-nos de que tinhamos que trabalhar no ficheiro mesh.py para alterar-mos o cubo que já estava desenhado.
 
@@ -11,3 +15,14 @@
 - Usamos novamente o codigo já feito no mesh.py para adicionarmos mais uns cubos ao cenário.
 - Já se consegue mover a camera pelo cenário através de condições "if" que verificam se as teclas são pressionadas.
 - Falta adicionar o movimento da visão da camera que será controlado pelo motion do rato e falta também fazer com que o programa não renderize nada para trás da visão do usuário, pois caso aconteça o programa crasha.
+
+# 3º Commit:
+- Alguns ajustes ao código.
+- Passamos bastante tempo a tentar aplicar o Back face culling ao programa mas sem sucesso, como resultado o programa crasha assim que algum objeto passe para trás da camara.
+- Teoricamente entendemos o que tinhamos de fazer para verificar se a normal das faces dos objetos faziam 90 graus ou menos que a normal da camara através de um produto interno. Mas quando tentamos aplicar a lógica em código não tivemos sucesso, deu-nos sempre erros, erros os quais tentamos resolver mas sem sucesso também.
+
+# Comentários:
+- Os commits foram todos feitos por mim (João Gonçalves), pois os meus colegas Francisco Salgado e João Fonseca não conseguiram instalar as wheels para poderem usar o programa.
+- O João Fonseca criou os cubos do cenerário para o FPV.py e ajudou na compreensão do código.
+- Eu fiz as duas piramides triângulares e os movimentos das piramides. Fiz também a camara do FPV.py mover-se e tentei aplicar o Back face culling.
+- O Francisco Salgado ajudou na compreensão do código e ajudou na parte em que tentamos introduzir o Back face culling

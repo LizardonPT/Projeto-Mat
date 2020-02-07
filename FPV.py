@@ -17,7 +17,6 @@ def main():
     # Define the size/resolution of our window
     res_x = 640
     res_y = 480
-    """movimento = pygame.mouse.get_rel()"""
     pygame.mouse.set_visible(False)
     pygame.event.set_grab(True)
 
@@ -35,6 +34,7 @@ def main():
     # This cube has 1 unit of side, and is red
     obj1 = Object3d("TestObject")
     obj1.scale = vector3(1, 1, 1)
+    obj1.position = vector3(0, 0, 0)
     obj1.mesh = Mesh.create_cube((1, 1, 1))
     obj1.material = Material(color(1,0,0,1), "TestMaterial1")
     scene.add_object(obj1)
@@ -59,7 +59,6 @@ def main():
     obj5.position = vector3(-2, 0, 4)
     obj5.mesh = Mesh.create_cube((1, 1, 1))
     obj5.material = Material(color(0.5,1,0.5,1), "TestMaterial5")
-
     scene.add_object(obj5)
 
     obj6 = Object3d("TestObject")
@@ -67,7 +66,6 @@ def main():
     obj6.position = vector3(-2, 0, 0)
     obj6.mesh = Mesh.create_cube((1, 1, 1))
     obj6.material = Material(color(1,0.5,0.5,1), "TestMaterial6")
-
     scene.add_object(obj6)
 
     # Specify the rotation of the object. It will rotate 15 degrees around the axis given, 
@@ -83,6 +81,8 @@ def main():
     # Game loop, runs forever
     while (True):
         # Process OS events
+        rotacao = vector3(0,0,0)
+        movimento = pygame.mouse.get_rel()
         for event in pygame.event.get():
             # Checks if the user closed the window
             if (event.type == pygame.QUIT):
@@ -91,6 +91,12 @@ def main():
             elif (event.type == pygame.KEYDOWN):
                 if (event.key == pygame.K_ESCAPE):
                     return
+        
+        if(event.type == pygame.MOUSEMOTION):
+            rotacao = vector3(-movimento[0], -movimento[1], 0)
+        
+        
+
         #move player
         key = pygame.key.get_pressed()
         if(key[pygame.K_s]):
